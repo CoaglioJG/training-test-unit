@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { FindClassroomById } from './find-by-id';
+import { FindByIdClassroom } from './find-by-id';
 import { GetAllClassroom } from './get-all';
 import { SaveClassroom } from './save';
 
 @Module({
-  providers: [SaveClassroom, FindClassroomById, GetAllClassroom],
-  exports: [SaveClassroom, FindClassroomById, GetAllClassroom],
+  providers: [FindByIdClassroom, GetAllClassroom, SaveClassroom],
+  exports: [FindByIdClassroom, GetAllClassroom, SaveClassroom],
 })
 export class ClassroomModule {}

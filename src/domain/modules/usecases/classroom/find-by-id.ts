@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Classroom } from 'src/domain/modules/entities/classroom';
 import { ClassroomRepository } from 'src/domain/repositories/classroom.repository';
+import { Classroom } from '../../entities/classroom';
 
 @Injectable()
-export class FindClassroomById {
+export class FindByIdClassroom {
   constructor(private readonly classroomRepository: ClassroomRepository) {}
 
   async call(id: number): Promise<Classroom> {
-    return await this.classroomRepository.findById(id);
+    return this.classroomRepository.findById(id);
   }
 }

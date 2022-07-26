@@ -3,7 +3,7 @@ import { ClassroomModule } from './modules/usecases/classroom/classroom.module';
 import { StudentModule } from './modules/usecases/student/student.module';
 
 @Module({
-  imports: [StudentModule, ClassroomModule],
-  exports: [StudentModule, ClassroomModule],
+  imports: [ClassroomModule, StudentModule],
+  exports: [ClassroomModule, StudentModule],
 })
 export class DomainModule {}

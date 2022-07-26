@@ -7,10 +7,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { StudentEntity } from './student.entity';
+import { Student } from './student.entity';
 
 @Entity({ name: 'classroom' })
-export class ClassroomEntity {
+export class Classroom {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,8 +23,8 @@ export class ClassroomEntity {
   @Column()
   number: number;
 
-  @OneToMany(() => StudentEntity, (student) => student.classroom)
-  students: StudentEntity;
+  @OneToMany(() => Student, (student) => student.classroom)
+  students: Student;
 
   @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
   createdAt: Date;

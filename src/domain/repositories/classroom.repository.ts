@@ -1,7 +1,7 @@
 import { Classroom } from '../modules/entities/classroom';
 
 export abstract class ClassroomRepository {
-  save: (classroom: Classroom) => Promise<Classroom>;
+  save: (payload: Classroom) => Promise<Classroom>;
+  getAll: () => Promise<Classroom[]>;
   findById: (id: number) => Promise<Classroom>;
-  all: () => Promise<Classroom[]>;
 }
