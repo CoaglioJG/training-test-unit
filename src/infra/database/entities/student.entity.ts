@@ -8,10 +8,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ClassroomEntity } from './classroom.entity';
+import { Classroom } from './classroom.entity';
 
 @Entity({ name: 'students' })
-export class StudentEntity {
+export class Student {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,11 +24,11 @@ export class StudentEntity {
   @Column()
   RA: string;
 
-  @ManyToOne(() => ClassroomEntity, (classroom) => classroom.students, {
+  @ManyToOne(() => Classroom, (classroom) => classroom.students, {
     cascade: true,
   })
   @JoinColumn({ name: 'classroom' })
-  classroom: ClassroomEntity;
+  classroom: Classroom;
 
   @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
   createdAt: Date;

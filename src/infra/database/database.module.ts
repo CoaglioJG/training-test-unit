@@ -1,14 +1,19 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentRepository } from '../../domain/repositories/student.repository';
-import { ClassroomEntity } from './entities/classroom.entity';
-import { StudentEntity } from './entities/student.entity';
+import { ClassroomRepository } from 'src/domain/repositories/classroom.repository';
+import { StudentRepository } from 'src/domain/repositories/student.repository';
+import { Classroom } from './entities/classroom.entity';
+import { Student } from './entities/student.entity';
+import { ClassroomImpl } from './postgres/classroom.impl';
 import { StudentImpl } from './postgres/student.impl';
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([ClassroomEntity, StudentEntity])],
-  providers: [{ provide: StudentRepository, useClass: StudentImpl }],
-  exports: [StudentRepository],
+  imports: [TypeOrmModule.forFeature([Student, Classroom])],
+  providers: [
+    { provide: StudentRepository, useClass: StudentImpl },
+    { provide: ClassroomRepository, useClass: ClassroomImpl },
+  ],
+  exports: [StudentRepository, ClassroomRepository],
 })
 export class DatabaseModule {}

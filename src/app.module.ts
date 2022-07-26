@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DomainModule } from './domain/domain.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import { DatabaseModule } from './infra/database/database.module';
-import { PresentationModule } from './presentation/presentation.module';
+import { DomainModule } from './domain/domain.module';
 import { DataBaseConnectionService } from './shared/databases/classrom';
 
 @Module({
@@ -12,9 +12,10 @@ import { DataBaseConnectionService } from './shared/databases/classrom';
       useClass: DataBaseConnectionService,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
+    ScheduleModule.forRoot(),
     DatabaseModule,
     DomainModule,
-    PresentationModule,
+    // PresentationModule,
   ],
   controllers: [],
   providers: [],
