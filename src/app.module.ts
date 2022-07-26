@@ -5,6 +5,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { DatabaseModule } from './infra/database/database.module';
 import { DomainModule } from './domain/domain.module';
 import { DataBaseConnectionService } from './shared/databases/classrom';
+import { PresentationModule } from './presentation/presentation.module';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { DataBaseConnectionService } from './shared/databases/classrom';
     ScheduleModule.forRoot(),
     DatabaseModule,
     DomainModule,
-    // PresentationModule,
+    PresentationModule,
   ],
   controllers: [],
   providers: [],

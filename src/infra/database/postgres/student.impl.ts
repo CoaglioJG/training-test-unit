@@ -1,8 +1,10 @@
-import { InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from 'src/domain/modules/entities/student';
 import { StudentRepository } from 'src/domain/repositories/student.repository';
+import { HttpExceptionError } from 'src/shared/utils/http-exception.erros';
 import { Repository } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 export class StudentImpl implements StudentRepository {
   constructor(
@@ -12,9 +14,16 @@ export class StudentImpl implements StudentRepository {
 
   async save(payload: Student): Promise<Student> {
     try {
-      return await this.studentRepository.save(payload);
+      const response = this.studentRepository.create({
+        ...payload,
+        uuid: uuid(),
+      });
+
+      if (!response) throw new BadRequestException('Error in create student');
+
+      return await this.studentRepository.save(response);
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpExceptionError(error);
     }
   }
 
@@ -22,7 +31,7 @@ export class StudentImpl implements StudentRepository {
     try {
       return await this.studentRepository.find();
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpExceptionError(error);
     }
   }
 
@@ -30,7 +39,7 @@ export class StudentImpl implements StudentRepository {
     try {
       return await this.studentRepository.findOne({ where: { id } });
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpExceptionError(error);
     }
   }
 }
